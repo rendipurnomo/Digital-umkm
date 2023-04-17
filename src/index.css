@@ -9,6 +9,10 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /* ========= pre-define css ========= */
 h1,
 h2,
