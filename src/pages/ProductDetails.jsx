@@ -56,7 +56,7 @@ const ProductDetails = () => {
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-roadster-line"
+                      className="ri-map-pin-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
                     {singleItem.kota}
@@ -64,7 +64,7 @@ const ProductDetails = () => {
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-settings-2-line"
+                      className="ri-store-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
                     {singleItem.namaToko}
@@ -72,7 +72,7 @@ const ProductDetails = () => {
 
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i
-                      className="ri-timer-flash-line"
+                      className="ri-star-s-fill"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
                     {singleItem.rating}
