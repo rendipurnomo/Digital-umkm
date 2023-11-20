@@ -26,13 +26,12 @@ const queryClient = new QueryClient({
 });
 
 const Routers = () => {
-  
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="home" />} />
             <Route path="home" element={<Home />} />
             <Route path="about" element={<About />} />
