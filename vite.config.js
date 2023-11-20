@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Digital-umkm/',
   experimental: {
     renderBuiltUrls(fileName, {  hostId,type }) {
       if (type === 'public') {
