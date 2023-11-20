@@ -1,3 +1,4 @@
+import { Path } from 'react-router-dom';
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -15,7 +16,7 @@ export default defineConfig({
     ) {
       if (type === 'public') {
         return 'https://digital-umkm.vercel.app/' + filename;
-      } else if (path.extname(hostId) === '.js') {
+      } else if (Path.extname(hostId) === '.js') {
         return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` };
       } else {
         return 'https://cdn.digital-umkm.vercel.app/assets/' + filename;
