@@ -10,7 +10,6 @@ export default defineConfig({
       filename,
       {
         hostId,
-        hostType,
         type,
       }
     ) {
