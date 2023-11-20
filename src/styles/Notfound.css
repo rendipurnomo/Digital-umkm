@@ -1,0 +1,25 @@
+.not-found {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.not-found_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found__content h1 {
+  font-size: 5rem;
+}
+
+.not-found a{
+  text-decoration: none;
+  background-color: #f9a826;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+}

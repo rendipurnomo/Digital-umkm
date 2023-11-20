@@ -1,37 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
-import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
-import "../../styles/header.css";
+import { Container, Row, Col } from 'reactstrap';
+import { Link, NavLink } from 'react-router-dom';
+import '../../styles/header.css';
 
-const navLinks = [
-  {
-    path: "/home",
-    display: "Home",
-  },
-  {
-    path: "/about",
-    display: "About",
-  },
-  {
-    path: "/products",
-    display: "Products",
-  },
-
-  {
-    path: "/blogs",
-    display: "Blog",
-  },
-  {
-    path: "/contact",
-    display: "Contact",
-  },
-];
+import { useUser } from '../../services/useUser';
+import { useLogout } from '../../services/useLogout';
 
 const Header = () => {
+  const { user, isAuthenticated } = useUser();
+  const { isLoading, logout } = useLogout();
+
   const menuRef = useRef(null);
 
-  const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+  const toggleMenu = () => menuRef.current.classList.toggle('menu__active');
 
   return (
     <header className="header">
@@ -49,21 +31,45 @@ const Header = () => {
             </Col>
 
             <Col lg="6" md="6" sm="6">
-              <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i className="ri-login-circle-line"></i> Login
-                </Link>
+              {isAuthenticated ? (
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <span>Hello, <strong className='text-uppercase'>{user.user_metadata.username}</strong></span>
+                  <button
+                    disabled={isLoading}
+                    onClick={logout}
+                    className="header__btn">
+                    {!isLoading ? (
+                      <span className="d-flex align-items-center gap-2" style={{ cursor: 'pointer',color: 'white' }}>
+                        <i className="ri-logout-circle-line"></i> Logout
+                      </span>
+                    ) : (
+                      'Loading...'
+                    )}
+                  </button>
+                </div>
+              ) : (
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <Link
+                    to="/login"
+                    className=" d-flex align-items-center gap-1">
+                    <i className="ri-login-circle-line"></i> Login
+                  </Link>
 
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i className="ri-user-line"></i> 
-                  <span type="button" className="btn_register position-relative">
-                    Register
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      Free
+                  <Link
+                    to="/register"
+                    className=" d-flex align-items-center gap-1">
+                    <i className="ri-user-line"></i>
+                    <span
+                      type="button"
+                      className="btn_register position-relative">
+                      Register
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        Free
+                      </span>
                     </span>
-                  </span>
-                </Link>
-              </div>
+                  </Link>
+                </div>
+              )}
             </Col>
           </Row>
         </Container>
@@ -76,7 +82,7 @@ const Header = () => {
             <Col lg="2" md="3" sm="4" className="d-flex align-items-center">
               <div className="logo">
                 <h1>
-                  <Link to="/home" className=" d-flex align-items-center gap-2">
+                  <Link to="/home" className="d-flex align-items-center gap-2">
                     <i className="ri-store-2-line"></i>
                     <span>
                       Digital <br /> UMKM
@@ -86,7 +92,11 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col lg="2" md="2" sm="4" className="d-flex align-items-center justify-content-center">
+            <Col
+              lg="2"
+              md="2"
+              sm="4"
+              className="d-flex align-items-center justify-content-center">
               <div className="header__location d-flex align-items-center justify-content-center gap-2">
                 <span>
                   <i className="ri-store-3-line"></i>
@@ -98,7 +108,11 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col lg="4" md="2" sm="4" className="d-flex align-items-center justify-content-center">
+            <Col
+              lg="4"
+              md="2"
+              sm="4"
+              className="d-flex align-items-center justify-content-center">
               <div className="header__location d-flex align-items-center justify-content-center gap-2">
                 <div className="header__location-content">
                   <h6>Semangat UMKM Menuju</h6>
@@ -107,7 +121,11 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col lg="2" md="2" sm="4" className="d-flex align-items-center justify-content-center">
+            <Col
+              lg="2"
+              md="2"
+              sm="4"
+              className="d-flex align-items-center justify-content-center">
               <div className="header__location d-flex align-items-center justify-content-center gap-2">
                 <span>
                   <i className="ri-luggage-cart-fill"></i>
@@ -123,8 +141,7 @@ const Header = () => {
               lg="2"
               md="3"
               sm="0"
-              className=" d-flex align-items-center justify-content-end "
-            >
+              className=" d-flex align-items-center justify-content-end ">
               <button className="header__btn btn ">
                 <Link to="/contact">
                   <i className="ri-phone-line"></i> Request a call
@@ -137,7 +154,7 @@ const Header = () => {
 
       {/* ========== main navigation =========== */}
 
-      <div className="main__navbar">
+      <nav className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
@@ -150,10 +167,9 @@ const Header = () => {
                   <NavLink
                     to={item.path}
                     className={(navClass) =>
-                      navClass.isActive ? "nav__active nav__item" : "nav__item"
+                      navClass.isActive ? 'nav__active nav__item' : 'nav__item'
                     }
-                    key={index}
-                  >
+                    key={index}>
                     {item.display}
                   </NavLink>
                 ))}
@@ -170,9 +186,33 @@ const Header = () => {
             </div>
           </div>
         </Container>
-      </div>
+      </nav>
     </header>
   );
 };
 
 export default Header;
+
+const navLinks = [
+  {
+    path: '/home',
+    display: 'Home',
+  },
+  {
+    path: '/about',
+    display: 'About',
+  },
+  {
+    path: '/products',
+    display: 'Products',
+  },
+
+  {
+    path: '/blogs',
+    display: 'Blog',
+  },
+  {
+    path: '/contact',
+    display: 'Contact',
+  },
+];

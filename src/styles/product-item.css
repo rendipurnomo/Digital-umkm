@@ -1,5 +1,6 @@
 .product__img img{
-  height: 250px;
+  object-fit: cover;
+  aspect-ratio: 16/9;
 }
 
 .product__item {

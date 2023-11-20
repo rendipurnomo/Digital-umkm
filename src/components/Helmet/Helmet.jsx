@@ -1,8 +1,7 @@
-import React from "react";
 
-const Helmet = (props) => {
-  document.title = "Digital UMKM - " + props.title;
-  return ( <div className="w-100">{props.children}</div>
+const Helmet = ({title,children}) => {
+  document.title = "Digital UMKM - " + title;
+  return ( <div className="w-100">{children}</div>
   )
 };
 
